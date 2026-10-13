@@ -14,10 +14,11 @@ Requires Minecraft 1.21.11, [Fabric Loader](https://fabricmc.net/use/) 0.18.2 or
 
 Requires **JDK 21**. The first build downloads Minecraft and needs internet access.
 
-```powershell
+``` 
+> powershell
 git clone https://github.com/sillisia/customcape.git
 cd customcape
-gradle wrapper --gradle-version 9.2.0
+& "$HOME\gradle-dist\gradle-9.2.0\bin\gradle.bat" wrapper --gradle-version 9.2.0
 .\gradlew.bat build
 ```
 
