@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "customcape",
+  "version": "${version}",
+  "name": "Custom Cape",
+  "description": "Design your own cape and elytra: gradients, banner patterns and cropped images, saved as switchable profiles. Client-side only; visible to other players who have the mod.",
+  "authors": ["sillisia"],
+  "contact": {
+    "issues": "https://github.com/sillisia/customcape/issues"
+  },
+  "icon": "assets/customcape/icon.png",
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["dev.customcape.client.CustomCapeClient"],
+    "modmenu": ["dev.customcape.client.ModMenuIntegration"]
+  },
+  "mixins": ["customcape.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.18.0",
+    "minecraft": "${mc_dep}",
+    "java": ">=21"
+  },
+  "suggests": {
+    "modmenu": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/YRzJZ2fdcC",
+        "modmenu.modrinth": "https://modrinth.com/project/customcape"
+      }
+    }
+  }
+}

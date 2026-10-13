@@ -1,0 +1,47 @@
+plugins {
+    id 'fabric-loom' version "${loom_version}"
+    id 'maven-publish'
+}
+
+def mc = (project.findProperty('mc') ?: '1.21.11').toString()
+def vp = new Properties()
+file("versions/${mc}.properties").withInputStream { vp.load(it) }
+
+version = "${project.mod_version}+mc${mc}"
+group = 'dev.customcape'
+base { archivesName = 'customcape' }
+
+repositories {
+    maven { url = 'https://maven.terraformersmc.com/' } 
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${vp.minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${vp.loader_version}"
+    modLocalRuntime "net.fabricmc.fabric-api:fabric-api:${vp.fabric_version}"
+    modCompileOnly "com.terraformersmc:modmenu:${vp.modmenu_version}"
+    modLocalRuntime "com.terraformersmc:modmenu:${vp.modmenu_version}"
+}
+
+sourceSets {
+    main {
+        java { srcDir "src/compat/${mc}/java" }
+        resources { srcDir "src/compat/${mc}/resources" }
+    }
+}
+
+processResources {
+    inputs.property 'version', project.version
+    inputs.property 'mc_dep', vp.mc_dep
+    filesMatching('fabric.mod.json') {
+        expand 'version': project.version, 'mc_dep': vp.mc_dep
+    }
+}
+
+tasks.withType(JavaCompile).configureEach { it.options.release = 21 }
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}

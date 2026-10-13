@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "dev.customcape.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "MixinAvatarRenderer",
+    "MixinLayerDefinitions",
+    "MixinMinecraftClient"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
